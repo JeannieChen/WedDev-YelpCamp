@@ -5,6 +5,8 @@ var bodyparser = require("body-parser");
 var campgrounds = [
 	{name: "Salmon Creek", image: "https://images.unsplash.com/photo-1547041270-d3d54e1263cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"},
 	{name: "Clear Creek", image: "https://images.unsplash.com/photo-1578582805561-4abd22211b9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"},
+	{name: "Alum Creek", image: "https://images.unsplash.com/photo-1582570870711-a3f4a57d1dce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"},
+	{name: "Clear Creek", image: "https://images.unsplash.com/photo-1578582805561-4abd22211b9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"},
 	{name: "Alum Creek", image: "https://images.unsplash.com/photo-1582570870711-a3f4a57d1dce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"}
 ]
 
