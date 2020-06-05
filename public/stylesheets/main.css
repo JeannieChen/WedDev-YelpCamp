@@ -1,0 +1,21 @@
+
+body {
+}
+
+.col-md-4 {
+	padding-top: 20px;
+}
+
+.col-md-8 {
+	padding-top: 30px;
+}
+
+#comment {
+	margin-top: 20px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}

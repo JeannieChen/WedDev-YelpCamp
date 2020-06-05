@@ -13,10 +13,11 @@
 		<div class="col-lg-12">
 			<h4> Our Most Popular Campgrounds </h4>
 		</div>
+		
 		<% campgrounds.forEach(function(items){ %>
 		<div class="col-sm-6 col-md-4">			
 			<div class="card">
-				<img src = "<%= items.image  %>" class="img-thumbnail card-img-top" alt="Responsive image">
+				<img src = "<%= items.image  %>" class="card-img-top" alt="Responsive image">
 				<div class="card-body">
 				<p class="card-text"><%= items.name %></p>
 				<p>
@@ -29,6 +30,7 @@
 	</div>
 	
 </div>
+	
 	
 
 
