@@ -16,7 +16,7 @@ var commentRoutes = require("./routes/comments"),
 	indexoRoutes = require("./routes/index");
 
 // Connect to DB 
-seedDB();
+// seedDB(); // Seed the database
 mongoose.connect("mongodb://localhost/yelp_camp");
 
 // JSON Parser & view engine setup
