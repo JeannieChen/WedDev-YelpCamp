@@ -19,3 +19,9 @@ body {
     height: 20vw;
     object-fit: cover;
 }
+
+.card-img-top.show {
+    width: 100%;
+    height: 35vw;
+    object-fit: cover;
+}

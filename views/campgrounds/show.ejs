@@ -13,11 +13,16 @@
 		</div>
 		<div class="col-md-8">
 			<div class="card">
-				<img src= "<%= campground.image %>" class="card-img-top">
+				<img src= "<%= campground.image %>" class="card-img-top show">
 				<div class="card-body">
 					<figcaption class="figure-caption text-right"> $9.00/night </figcaption>
 					<a href="#"><h3 class="card-title"><%= campground.name %></h3></a>
-					<p class="card-text"> <%= campground.description %> </p>	
+					<p class="card-text"> <%= campground.description %> </p>
+					<p class="card-text"> 
+						<em class="figure-caption text-right">
+							Submitted by <%= campground.author.username %> 
+						</em>
+					</p>				
 				</div>		
 			</div>
 			
