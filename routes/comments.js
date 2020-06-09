@@ -41,6 +41,42 @@ router.post("/campgrounds/:id/comments", isLoggedIn, function(req, res){
 	})
 });
 
+// EDIT
+router.get("/campgrounds/:id/comments/:comment_id/edit", isLoggedIn, function(req, res){
+	Comment.findById(req.params.comment_id, function(err, foundComment){
+		if(err){
+			res.redirect("back");
+		}else{
+			res.render("comments/edit", {
+			campground_id: req.params.id,
+			comment: foundComment
+			});				
+		}
+	})
+});
+
+// UPDATE
+router.put("/campgrounds/:id/comments/:comment_id", isLoggedIn, function(req, res){
+	Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+		if(err){
+			res.redirect("back");
+		}else{
+			res.redirect("/campgrounds/" + req.params.id);
+		}
+	})
+});
+
+// DESTROY
+router.delete("/campgrounds/:id/comments/:comment_id", isLoggedIn, function(req, res){
+	Comment.findByIdAndRemove(req.params.comment_id, function(err){
+		if(err){
+			res.redirect("back");
+		}else{
+			res.redirect("/campgrounds/"+ req.params.id);
+		}
+	})
+});
+			
 // Define middleware function
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
