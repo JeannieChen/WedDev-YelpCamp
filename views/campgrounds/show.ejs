@@ -22,7 +22,11 @@
 						<em class="figure-caption text-right">
 							Submitted by <%= campground.author.username %> 
 						</em>
-					</p>				
+					</p>
+					<a class="btn btn-sm btn-outline-secondary" href="/campgrounds/<%= campground._id%>/edit"> Edit </a>
+					<form id="delete-camp-btn" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+						<button class="btn btn-sm btn-outline-danger"> Delete </button>
+					</form>
 				</div>		
 			</div>
 			
