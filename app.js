@@ -21,11 +21,12 @@ var commentRoutes = require("./routes/comments"),
 // seedDB(); // Seed the database
 mongoose.connect("mongodb://localhost/yelp_camp");
 
-// JSON Parser & view engine setup, override, use flash
+// JSON Parser & view engine setup, override, use flash, moment 
 app.use(bodyparser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = require("moment");
 
 // Set up stylesheet
 app.use(express.static(__dirname + "/public"));
