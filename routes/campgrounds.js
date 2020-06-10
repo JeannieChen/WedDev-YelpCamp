@@ -7,6 +7,7 @@ var middleware = require("../middleware/index.js");
 router.get("/campgrounds", function(req, res){
 	Campground.find({}, function(err, allcamps){
 		if(err){
+			req.flash("error", "Oops! Something went wrong.");
 			console.log(err);
 		} else{
 			res.render("campgrounds/index", {
@@ -38,9 +39,11 @@ router.post("/campgrounds", middleware.isLoggedIn , function(req,res){
 	// Create a new campground and save to DB 	
 	Campground.create(newCampground, function(err, newCamp){
 			if(err){
+				req.flash("error", "Oops! Something went wrong.");
 				console.log(err);
 			}else{
-				// Redirect to campgrounds 			
+				// Redirect to campgrounds 	
+				req.flash("success", "Campground added.");
 				res.redirect("/campgrounds");
 			}
 		}
@@ -52,6 +55,7 @@ router.post("/campgrounds", middleware.isLoggedIn , function(req,res){
 router.get("/campgrounds/:id", function(req, res){
 	Campground.findById(req.params.id).populate("comments").exec(function(err, foundCamp){
 		if(err){
+			req.flash("error", "Oops! Something went wrong.");
 			console.log(err);
 		}else{
 			res.render("campgrounds/show", {campground: foundCamp});
@@ -70,6 +74,7 @@ router.get("/campgrounds/:id/edit", middleware.checkCampgroundOwnership, functio
 router.put("/campgrounds/:id", middleware.checkCampgroundOwnership, function(req, res){
 	Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCamp){
 		if(err){
+			req.flash("error", "Oops! Something went wrong.");
 			res.redirect("/campgrounds");
 		}else{
 			res.redirect("/campgrounds/" + req.params.id)
@@ -82,8 +87,10 @@ router.put("/campgrounds/:id", middleware.checkCampgroundOwnership, function(req
 router.delete("/campgrounds/:id", middleware.checkCampgroundOwnership, function(req, res){
 	Campground.findByIdAndRemove(req.params.id, function(err){
 		if(err){
+			req.flash("error", "Oops! Something went wrong.");
 			res.redirect("/campgrounds");
 		}else{
+			req.flash("success", "Campground deleted.");
 			res.redirect("/campgrounds");
 		}
 	})
