@@ -3,10 +3,14 @@
 <div class="container">
 	<h3 style="text-align: center"> Create a new Campground </h3>
 	<form action="/campgrounds" method="POST">
-		<div style="width: 30%; margin: 2rem auto">
+		<div style="width: 65%; margin: 2rem auto">
 			<div class="form-group">
     			<label for="formGroupExampleInput">Camp Site</label>
 	  			<input type="text" name="name" placeholder="Name" class="form-control" id="formGroupExampleInput">
+  			</div>
+			<div class="form-group">
+    			<label for="formGroupExampleInput"> Price</label>
+	  			<input type="number" name="price" placeholder="$ per night" min="0.01" step="0.01" class="form-control" id="formGroupExampleInput">
   			</div>
   			<div class="form-group">
     			<label for="formGroupExampleInput2">Image Address</label>
@@ -14,8 +18,8 @@
   			</div>	
 			<div class="form-group">
     			<label for="formGroupExampleInput2">Description</label>
-				<textarea rows="5" name="description" placeholder="i.e. No bathrooms" class="form-control" id="formGroupExampleInput2"></textarea>
-  			</div>	
+				<textarea rows="5" name="description" placeholder="i.e. Pet friendly" class="form-control" id="formGroupExampleInput2"></textarea>
+  			</div>		
 			<button type="submit" class="btn btn-outline-primary btn-block">Submit</button>	
 		</div>
 	</form>

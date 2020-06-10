@@ -3,10 +3,14 @@
 <div class="container">
 	<h3 style="text-align: center"> Edit <%= campground.name %> </h3>
 	<form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
-		<div style="width: 30%; margin: 2rem auto">
+		<div style="width: 65%; margin: 2rem auto">
 			<div class="form-group">
     			<label for="formGroupExampleInput">Camp Site</label>
 	  			<input type="text" name="campground[name]" value=<%= campground.name %> class="form-control" id="formGroupExampleInput">
+  			</div>
+			<div class="form-group">
+    			<label for="formGroupExampleInput"> Price</label>
+	  			<input type="number" name="campground[price]" value="<%= campground.price %>" min="0.01" step="0.01" class="form-control" id="formGroupExampleInput">
   			</div>
   			<div class="form-group">
     			<label for="formGroupExampleInput2">Image Address</label>
@@ -16,6 +20,7 @@
     			<label for="formGroupExampleInput2">Description</label>
 				<textarea rows="5" name="campground[description]" class="form-control" id="formGroupExampleInput2"><%= campground.description %></textarea>
   			</div>	
+
 			<button type="submit" class="btn btn-outline-primary btn-block">Submit</button>	
 		</div>
 	</form>
