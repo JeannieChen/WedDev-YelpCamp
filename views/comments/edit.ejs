@@ -5,10 +5,10 @@
 	<form action="/campgrounds/<%= campground_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
 		<div style="width: 30%; margin: 2rem auto">
 			<div class="form-group">
-	  			<input type="text" name="comment[text]" value="<%= comment.text %>" class="form-control" id="formGroupExampleInput">
+				<textarea rows="5" name="campground[description]" class="form-control" id="formGroupExampleInput2"><%= comment.text %></textarea>
   			</div>
 			
-			<button type="submit" class="btn btn-primary btn-block">Submit</button>	
+			<button type="submit" class="btn btn-outline-primary btn-block">Submit</button>	
 		</div>
 	</form>
 </div>

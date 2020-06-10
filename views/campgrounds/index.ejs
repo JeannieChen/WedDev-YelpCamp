@@ -2,10 +2,10 @@
 
 <div class="container">
 	<div class="jumbotron">
-		<h1 class="display-4"> Welcome to YelpCamp! </h1>
+		<h1 class="display-4"><i class="fal fa-stars"></i> Welcome to YelpCamp </h1>
 		<p> View out hand-picked campgrounds from all over the world</p>
 		<p>
-			<a class="btn btn-lg btn-primary" href="/campgrounds/new"> Add New Campground here!</a>
+			<a class="btn btn-outline-secondary special-font-md" href="/campgrounds/new"> Add New Campground here!</a>
 		</p>
 	</div>
 	
@@ -16,12 +16,12 @@
 		
 		<% campgrounds.forEach(function(items){ %>
 		<div class="col-sm-6 col-md-4">			
-			<div class="card">
+			<div class="card shadow rounded">
 				<img src = "<%= items.image  %>" class="card-img-top" alt="Responsive image">
 				<div class="card-body">
 				<p class="card-text"><%= items.name %></p>
 				<p>
-					<a href="/campgrounds/<%= items._id %>" class="btn btn-warning" >More Info</a
+					<a href="/campgrounds/<%= items._id %>" class="btn btn-outline-secondary" >More Info</a
 				</p>
 				</div>
 			</div>		
@@ -32,6 +32,4 @@
 </div>
 	
 	
-
-
 <%- include("../partials/footer") %>
