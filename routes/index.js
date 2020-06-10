@@ -17,7 +17,11 @@ router.get("/register", function(req, res){
 });
 // Hangle sign up
 router.post("/register", function(req, res){
-	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+	var newUser = new User({username: req.body.username});
+	if(req.body.isAdmin === 'asdf'){
+		newUser.isAdmin = true;
+	};
+	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			req.flash("error", err.message);
 			return res.render("register");
