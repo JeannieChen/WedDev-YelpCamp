@@ -2,12 +2,13 @@ var express = require("express");
 var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware/index.js");
+var func = require("../middleware/function.js");
 
 // INDEX
 router.get("/campgrounds", function(req, res){
 	// Search for camp
 	if(req.query.search){
-		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+		const regex = new RegExp(func.escapeRegex(req.query.search), 'gi');
 		Campground.find({name: regex}, function(err, allcamps){
 			if(err){
 				req.flash("error", "Oops! Something went wrong.");
@@ -114,9 +115,5 @@ router.delete("/campgrounds/:id", middleware.checkCampgroundOwnership, function(
 	})
 });
 
-
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
 
 module.exports = router;

@@ -85,31 +85,5 @@ router.delete("/campgrounds/:id/comments/:comment_id", middleware.checkCommentOw
 	})
 });
 			
-// // Define middleware function
-// function isLoggedIn(req, res, next){
-// 	if(req.isAuthenticated()){
-// 		return next();
-// 	}
-// 	res.redirect("/login");
-// };
-
-// function checkCommentOwnership(req, res, next){
-// 	if(req.isAuthenticated()){
-// 		Comment.findById(req.params.comment_id, function(err, foundComment){
-// 			if(err){
-// 				res.redirect("back");
-// 			}else{
-// 				// check user owns the comment
-// 				if(foundComment.author.id.equals(req.user._id)){
-// 					next();
-// 				}else{
-// 					res.redirect("back");
-// 				}
-// 			}	
-// 		})	
-// 	} else{
-// 		res.redirect("back");
-// 	}
-// };
 
 module.exports = router;
