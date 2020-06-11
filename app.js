@@ -20,7 +20,15 @@ var commentRoutes = require("./routes/comments"),
 
 // Connect to DB 
 // seedDB(); // Seed the database
-mongoose.connect("mongodb://localhost/yelp_camp");
+// COPY: mongodb, view engine setup
+mongoose.connect("mongodb+srv://JeannieChen:283300Cyj@cluster0-ybpsb.mongodb.net/<dbname>?retryWrites=true&w=majority", {
+	useNewUrlParser: true,
+	useCreateIndex: true
+}).then(() => {
+	console.log("Connected to DB.");
+}).catch(err => {
+	console.log('ERROR: ', err.message)
+});
 
 // JSON Parser & view engine setup, override, use flash, moment 
 app.use(bodyparser.urlencoded({extended: true}));
@@ -58,6 +66,12 @@ app.use(commentRoutes);
 app.use(likeRoutes);
 
 // listener
-app.listen(3000, function(){
-	console.log("YelpCamp Server listening on port 3000.");
+// app.listen(3000, function(){
+// 	console.log("YelpCamp Server listening on port 3000.");
+// });
+const host = '0.0.0.0';
+const port = process.env.PORT || 3000;
+app.listen(port, host, function() {
+  console.log("Server started.......");
 });
+
