@@ -6,8 +6,6 @@
 			<div class="card border-light" id="comment">
 				<h4 class="card-title">
 					Comments
-					<!-- <a class="btn btn-link float-right" href="/campgrounds/<%= campground._id %>/comments/new" data-animate-hover="pulse" >Add New Comment
-					</a> -->
 					<a href="/campgrounds/<%= campground._id %>/comments/new" data-animate-hover="pulse" class="float-right">
 						<i class="fal fa-comment-alt-plus"></i>
                		 </a>
@@ -17,13 +15,27 @@
 					<% campground.comments.forEach(function(comment){ %>
 					<div class="row">
 						<div class="col-md-12"><br>		
-							<a href="/users/<%= comment.author.id%>"><%= comment.author.username %></a>
-						<span class="float-right">
-							<%= moment(comment.createdAt).fromNow() %>
-						</span>
-						<p> <%= comment.text %> </p>
-						<!-- 	Give owner or admin the access to delete/edit comment -->
-						<% if((currentUser && comment.author.id.equals(currentUser._id)) ||
+							<a href="/users/<%= comment.author.id%>">
+								<%= comment.author.username %>
+							</a>
+							
+							<% if (comment.rating !== 0) { %>
+							<p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star <% if (comment.rating > 1) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (comment.rating > 2) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (comment.rating > 3) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (comment.rating > 4) { %> checked <% } %>"></span>
+                   			</p>
+							<% } %>
+					
+							<span class="float-right">
+								<%= moment(comment.createdAt).fromNow() %>
+							</span>
+							<p> <%= comment.text %> </p>
+							
+							<!-- 	Give owner or admin the access to delete/edit comment -->
+							<% if((currentUser && comment.author.id.equals(currentUser._id)) ||
 						 	(currentUser && currentUser.isAdmin) ){ %>
 						<a class="btn btn-sm btn-outline-secondary float-right" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
 							Edit

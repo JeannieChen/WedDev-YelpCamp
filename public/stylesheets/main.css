@@ -3,6 +3,9 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+.checked {
+    color: orange;
+}
 
 .alert{
 	padding: 1.5rem 1rem;

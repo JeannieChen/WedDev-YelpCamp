@@ -47,6 +47,16 @@
 					<li class="list-group-item">
 						<%= comment.text %>
 						
+						<% if (comment.rating !== 0) { %>
+						<p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star <% if (comment.rating > 1) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (comment.rating > 2) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (comment.rating > 3) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (comment.rating > 4) { %> checked <% } %>"></span>
+                   		</p>
+						<% } %>
+						
 						<% if (comments.length > 1){ %>
 							<br>
 						<% } %>
