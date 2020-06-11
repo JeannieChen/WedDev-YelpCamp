@@ -1,0 +1,67 @@
+
+<%- include("../partials/header") %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="card-deck">
+				<div class="card border-light">
+					 <img src="<%= user.avatar %>" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h1 class="card-title"><%= user.username %></h1>
+						<p class="card-text">
+							<i class="fad fa-envelope profile-icon"></i> 
+							<%= user.email %>
+						</p>
+					</div>
+					<div class="card-footer">
+						<% if(user.isAdmin){ %>
+							<i class="fas fa-user-cog profile-icon"></i> Admin
+						<% } else{ %>
+							<i class="far fa-user profile-icon"></i> General User
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-9">
+			<h3> Campgrounds Created by <%= user.username %> </h3>
+			<% campgrounds.forEach(function(camp){ %>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<a href="/campgrounds/<%= camp._id %>" ><%= camp.name %></a>
+					<footer class="blockquote-footer float-right">
+							<cite title="Source Title">
+								<%= moment(camp.createdAt).fromNow() %>,
+								<%= camp.createdAt.toDateString() %>
+							</cite>
+					</footer>
+				</li>
+			<% }) %>
+			</ul>
+			
+			<br>
+			<h4>Comments</h4>
+			<% comments.forEach(function(comment){ %>
+					<li class="list-group-item">
+						<%= comment.text %>
+						
+						<% if (comments.length > 1){ %>
+							<br>
+						<% } %>
+						<footer class="blockquote-footer float-right">
+							<cite title="Source Title">
+								<%= moment(comment.createdAt).fromNow() %>,
+								<%= comment.createdAt.toDateString() %>
+							</cite>
+						</footer>
+					</li>
+			<% }) %>
+			
+		</div>
+		
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

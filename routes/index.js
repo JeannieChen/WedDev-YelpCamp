@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
+var Campground = require("../models/campground");
+var Comment = require("../models/comment");
 var User = require("../models/user");
 var middleware = require("../middleware/index.js");
 
@@ -17,7 +19,10 @@ router.get("/register", function(req, res){
 });
 // Hangle sign up
 router.post("/register", function(req, res){
-	var newUser = new User({username: req.body.username});
+	var newUser = new User({
+		username: req.body.username,
+		email: req.body.email
+	});
 	if(req.body.isAdmin === 'asdf'){
 		newUser.isAdmin = true;
 	};
@@ -49,6 +54,36 @@ router.get("/logout", function(req, res){
 	req.logout();
 	req.flash("success", "You've logged out.");
 	res.redirect("/campgrounds");
+});
+
+// USER profile - SHOW
+router.get("/users/:id", function(req, res){
+	User.findById(req.params.id, function(err, foundUser){
+		if(err){
+			req.flash("error", err.message);
+			res.redirect("back");
+		}else{
+		Campground.find().where('author.id').equals(foundUser._id).exec(function(err,campgrounds){
+				if(err){
+					req.flash("error", err.message);
+					res.redirect("back");
+				}else{
+			Comment.find().where('author.id').equals(foundUser._id).exec(function(err,comments){
+					if(err){
+						req.flash("error", err.message);
+						res.redirect("back");
+					}else{
+						res.render("users/show", {
+							user: foundUser,
+							campgrounds: campgrounds,
+							comments: comments
+						});	
+						}
+				})
+				}
+		})
+		}
+	})
 });
 
 

@@ -90,6 +90,20 @@ body {
     object-fit: cover;
 }
 
+
+.col-md-4.show {
+	padding-top: 0;
+}
+
+
+.profile-icon{
+	margin-right: 10px;
+}
+
+.profile-card{
+	padding:0;
+}
+
 .jumbotron {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
