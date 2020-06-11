@@ -15,7 +15,8 @@ var express  = require("express"),
 
 var commentRoutes = require("./routes/comments"),
 	campgroundRoutes = require("./routes/campgrounds"),
-	indexoRoutes = require("./routes/index");
+	likeRoutes = require("./routes/like"),
+	indexRoutes = require("./routes/index");
 
 // Connect to DB 
 // seedDB(); // Seed the database
@@ -51,10 +52,10 @@ app.use(function(req, res, next){
 });
 
 // Set up routes
-app.use(indexoRoutes);
+app.use(indexRoutes);
 app.use(campgroundRoutes);
 app.use(commentRoutes);
-
+app.use(likeRoutes);
 
 // listener
 app.listen(3000, function(){

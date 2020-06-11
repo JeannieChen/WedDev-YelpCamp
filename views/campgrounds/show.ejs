@@ -2,20 +2,67 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
-			<p class="lead"> <%= campground.name %> </p>
-			<div class="list-group">
-				<li class="list-group-item">Info 1</li>
-				<li class="list-group-item">Info 2</li>
+		<div class="col-md-5">		
+			<div class="card border-light" id="comment">
+				<h4 class="card-title">
+					Comments
+					<!-- <a class="btn btn-link float-right" href="/campgrounds/<%= campground._id %>/comments/new" data-animate-hover="pulse" >Add New Comment
+					</a> -->
+					<a href="/campgrounds/<%= campground._id %>/comments/new" data-animate-hover="pulse" class="float-right">
+						<i class="fal fa-comment-alt-plus"></i>
+               		 </a>
+				</h4>
+				
+				<div class="card-body">
+					<% campground.comments.forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12"><br>		
+							<a href="/users/<%= comment.author.id%>"><%= comment.author.username %></a>
+						<span class="float-right">
+							<%= moment(comment.createdAt).fromNow() %>
+						</span>
+						<p> <%= comment.text %> </p>
+						<!-- 	Give owner or admin the access to delete/edit comment -->
+						<% if((currentUser && comment.author.id.equals(currentUser._id)) ||
+						 	(currentUser && currentUser.isAdmin) ){ %>
+						<a class="btn btn-sm btn-outline-secondary float-right" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
+							Edit
+						</a>
+							<form class="delete-camp-btn float-right" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+								<button type="submit" class="btn btn-sm btn-outline-danger">
+									Delete
+								</button>
+							</form>
+						<% } %>
+						</div>	
+					</div>
+					<% }) %>	
+				</div>	<!-- End of card-body	-->
 			</div>
-			
-		</div>
-		<div class="col-md-8">
-			<div class="card">
+		</div> <!-- End of col-5	-->
+		
+		
+		<div class="col-md-7">
+			<div class="card border-light">
 				<img src= "<%= campground.image %>" class="card-img-top show">
 				<div class="card-body">
 					<figcaption class="figure-caption text-right">$<%= campground.price%>/night </figcaption>
-					<a href="#"><h3 class="card-title"><%= campground.name %></h3></a>
+					<% if( campground.link ){ %>
+						<a href="<%= campground.link %>"><h3 class="card-title"><%= campground.name %></h3></a>
+					<% } else{ %>
+						<h3 class="card-title"><%= campground.name %></h3>
+					<% } %>
+					
+					<h6 class="card-subtitle mb-2 text-muted">
+						<i class="fal fa-map-marker-alt"></i>
+						<% if(campground.city && campground.state && campground.country){ %>
+							<%= campground.city %>, <%= campground.state %>, <%= campground.country %>
+						<% } else{ %>
+							Somewhere on earth	
+						<% } %>
+					</h6>
+					<br>
+					
 					<p class="card-text"> <%= campground.description %> </p>
 					<p class="card-text"> 
 						<em class="figure-caption text-right">
@@ -27,6 +74,25 @@
 						</em>
 					</p>
 					
+					<!-- 	like button   -->
+					<form action="/campgrounds/<%= campground._id %>/like" method="POST">
+        				<div class="btn-group float-right">
+							<% if (currentUser && campground.likes.some(function (like) {
+                				return like.equals(currentUser._id)
+           					 })) { %>
+               				 <button class="btn btn-sm btn-link">
+                   				 <i class="fal fa-thumbs-up"></i> 
+								 Liked (<%= campground.likes.length %>)
+                			 </button>
+           					 <% } else { %>
+               				 <button class="btn btn-sm btn-link">
+                  				 <i class="fal fa-thumbs-up"></i>
+								 Like (<%= campground.likes.length %>)
+               				 </button>
+            				<% } %>
+       					 </div>
+   					 </form>
+					
 					<!-- 	Give owner or admin the access to delete/edit camp -->
 					<% if( (currentUser && campground.author.id.equals(currentUser._id)) ||
 						 (currentUser && currentUser.isAdmin) ){ %>	  				
@@ -35,54 +101,12 @@
 							<button class="btn btn-sm btn-outline-danger"> Delete </button>
 						</form>					  
 					<% } %>
+				
 				</div>		
 			</div>
-			
-			<div class="card bg-light" id="comment">
-				<div class="card-body">
-					<div class="text-right">
-						<a class="btn btn-outline-primary" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment
-						</a>
-					</div>
-					<hr>
-					
-					
-					<% campground.comments.forEach(function(comment){ %>
-						<div class="row">
-							<div class="col-md-12">
-								<br>		
-								<a href="/users/<%= comment.author.id%>">
-								<%= comment.author.username %>
-								</a>
-								
-								<span class="float-right">
-									<%= moment(comment.createdAt).fromNow() %>
-								</span>
-								<p> <%= comment.text %> </p>
-								
-								<!-- 	Give owner or admin the access to delete/edit comment -->
-								<% if( 
-									(currentUser && comment.author.id.equals(currentUser._id)) ||
-						 			(currentUser && currentUser.isAdmin) ){ %>
-								<a 
-								   class="btn btn-sm btn-outline-secondary float-right" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
-									Edit
-								</a>
-								<form class="delete-camp-btn float-right" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-									<button type="submit" class="btn btn-sm btn-outline-danger">
-										Delete
-									</button>
-								</form>
-								<% } %>
-							</div>	
-						</div>
-					<% }) %>
-					
-				</div>		
-			</div>
-		</div>	
-	</div>
-	
+				
+		</div> <!-- End of col-7  -->
+	</div> <!-- End of row -->
 </div>
 
 

@@ -19,9 +19,17 @@
 			<div class="card shadow rounded">
 				<img src = "<%= items.image  %>" class="card-img-top" alt="Responsive image">
 				<div class="card-body">
-					<p class="card-text"><%= items.name %></p>
+					<h4 class="card-title"><%= items.name %></h4>
+					<h6 class="card-subtitle mb-2 text-muted">
+						<i class="fal fa-map-marker-alt"></i>
+						<% if(items.city && items.state && items.country){ %>
+							<%= items.city %>, <%= items.state %>, <%= items.country %>
+						<% } else{ %>
+							Somewhere on earth	
+						<% } %>
+					</h6>
 					<p>
-						<a href="/campgrounds/<%= items._id %>" class="btn btn-outline-secondary" >More Info</a
+						<a href="/campgrounds/<%= items._id %>" class="btn btn-sm btn-outline-secondary" >More Info</a
 					</p>
 				</div>
 			</div>		
