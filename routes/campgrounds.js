@@ -5,17 +5,34 @@ var middleware = require("../middleware/index.js");
 
 // INDEX
 router.get("/campgrounds", function(req, res){
-	Campground.find({}, function(err, allcamps){
-		if(err){
-			req.flash("error", "Oops! Something went wrong.");
-			console.log(err);
-		} else{
-			res.render("campgrounds/index", {
-				campgrounds:  allcamps,
-				currentUser: req.user
-			});
-		}
-	});
+	// Search for camp
+	if(req.query.search){
+		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+		Campground.find({name: regex}, function(err, allcamps){
+			if(err){
+				req.flash("error", "Oops! Something went wrong.");
+				console.log(err);
+			} else{
+				res.render("campgrounds/index", {
+					campgrounds:  allcamps,
+					currentUser: req.user
+				});
+			}
+		})
+	// If nothing in Search, show all camps
+	}else{
+		Campground.find({}, function(err, allcamps){
+			if(err){
+				req.flash("error", "Oops! Something went wrong.");
+				console.log(err);
+			} else{
+				res.render("campgrounds/index", {
+					campgrounds:  allcamps,
+					currentUser: req.user
+				});
+			}
+		})
+	}
 });
 
 // NEW
@@ -97,5 +114,9 @@ router.delete("/campgrounds/:id", middleware.checkCampgroundOwnership, function(
 	})
 });
 
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;

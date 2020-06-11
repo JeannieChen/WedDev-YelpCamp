@@ -21,12 +21,20 @@
   			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
      				 <li class="nav-item">
-       					 <a class="nav-link" href="/campgrounds"> View All </a>
+       					 <a class="nav-link active" href="/campgrounds"> View All </a>
       				</li>
 					<li class="nav-item">
        					 <a class="nav-link" href="/campgrounds/new"> Add New </a>
       				</li>
-    			</ul>	
+    			</ul>
+				
+				<form action="/campgrounds" method="GET" class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="text" name="search" placeholder="i.e. Canyon Creek">
+						<button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">
+							Search
+						</button>
+    			</form>
+
 	  
    			 <form class="form-inline my-2 my-lg-0">
 				 <% if(!currentUser){ %>
