@@ -21,7 +21,7 @@ var commentRoutes = require("./routes/comments"),
 // Connect to DB 
 // seedDB(); // Seed the database
 // COPY: mongodb, view engine setup
-mongoose.connect("mongodb+srv://JeannieChen:283300Cyj@cluster0-ybpsb.mongodb.net/<dbname>?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://JeannieChen:[pwd]@cluster0-ybpsb.mongodb.net/<dbname>?retryWrites=true&w=majority", {
 	useNewUrlParser: true,
 	useCreateIndex: true
 }).then(() => {
